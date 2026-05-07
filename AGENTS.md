@@ -1,10 +1,10 @@
 # Instruções para Agentes (AGENTS.md)
 
 > [!NOTE]
-> **Autor:** [Cassiano Freitas](https://github.com/cassianofreitas)
-> **Versão:** 1.0.0
-> **Idioma de trabalho:** Português do Brasil (pt-BR).
-> **Escopo:** Este documento define as diretrizes, padrões e expectativas para todos os agentes de IA que interagem com este repositório. O objetivo é garantir consistência, acessibilidade e qualidade técnica seguindo as melhores práticas modernas.
+> - **Autor:** [Cassiano Freitas](https://github.com/cassianofreitas)
+> - **Versão:** 1.0.0
+> - **Idioma de trabalho:** Português do Brasil (pt-BR).
+> - **Escopo:** Este documento define as diretrizes, padrões e expectativas para todos os agentes de IA que interagem com este repositório. O objetivo é garantir consistência, acessibilidade e qualidade técnica seguindo as melhores práticas modernas.
 
 ---
 
