@@ -1,8 +1,8 @@
-# Instruções para Agentes (AGENTS.md)
+# Instruções para Agentes de Desenvolvimento (AGENTS.md)
 
 > [!NOTE]
 > - **Autor:** [Cassiano Freitas](https://github.com/cassianofreitas)
-> - **Versão:** 1.0.0
+> - **Versão:** 1.0.1
 > - **Idioma de trabalho:** Português do Brasil (pt-BR).
 > - **Escopo:** Este documento define as diretrizes, padrões e expectativas para todos os agentes de IA que interagem com este repositório. O objetivo é garantir consistência, acessibilidade e qualidade técnica seguindo as melhores práticas modernas.
 
@@ -68,11 +68,59 @@
 
 ## 8. Instruções de Execução para o Agente
 
-1. **Verificação de Documentos:** Antes de qualquer desenvolvimento, verifique a existência de `README.md`, `CHANGELOG.md`, `.gitignore`,  `.dockerignore` e outros arquivos de padronização citados. Se estiverem ausentes, crie-os com o conteúdo inicial pertinente.
-2. **Execução Inicial:** Execute `gsd` para alinhar as prioridades da sessão.
-3. **Padrões de Código:** Valide se o código gerado segue os padrões de linting e acessibilidade (WCAG 2.2).
-4. **Dependências:** Ao sugerir novos pacotes, priorize soluções leves e compatíveis com Next.js.
-5. **Builds:** Ao modificar o Dockerfile, valide se o `.dockerignore` está otimizado para evitar o envio de contexto desnecessário ao daemon.
+- **Verificação de Documentos:** Antes de qualquer desenvolvimento, verifique a existência de `README.md`, `CHANGELOG.md`, `.gitignore`, `.dockerignore` e outros arquivos de padronização citados. Se estiverem ausentes, crie-os com o conteúdo inicial pertinente.
+- **Execução Inicial:** Execute `gsd` para alinhar as prioridades da sessão.
+- **Padrões de Código:** Valide se o código gerado segue os padrões de linting e acessibilidade (WCAG 2.2).
+- **Dependências:** Ao sugerir novos pacotes, priorize soluções leves e compatíveis com Next.js.
+- **Builds:** Ao modificar o Dockerfile, valide se o `.dockerignore` está otimizado para evitar o envio de contexto desnecessário ao daemon.
+
+---
+
+## Protocolo de Dockerização e Deploy (Next.js)
+
+Sempre que o projeto for preparado para deploy no ambiente de produção (Portainer/Nginx Proxy Manager) ou acontecer algum update ou merge na main, siga as instruções abaixo para garantir a padronização da infraestrutura.
+
+### 1. Verificação e Criação de Ativos
+
+Se os arquivos abaixo não existirem na raiz do projeto, você deve criá-los seguindo estas especificações:
+
+#### A. `Dockerfile` (Multi-stage Build)
+
+O build deve ser otimizado para produção utilizando três estágios: `deps`, `builder` e `runner`.
+
+- **Base:** `node:20-alpine`
+- **Output:** Apenas os artefatos necessários (`.next`, `public`, `node_modules`, `package.json`).
+
+#### B. `.dockerignore`
+
+Deve excluir obrigatoriamente:
+
+- `node_modules`, `.next`, `.git`, `.env.local` e arquivos de log.
+
+#### C. `docker-compose.yml`
+
+Deve ser configurado para o ecossistema Portainer + NPM:
+
+- **Rede:** Utilizar obrigatoriamente a rede externa chamada `proxy`.
+- **Restart:** Configurado como `always`.
+- **Ambiente:** `NODE_ENV=production`.
+
+### 2. Comandos de Operação
+
+Para construir e testar localmente antes do push:
+
+- **Build:** `docker build -t [nome-do-projeto]:latest .`
+- **Execução:** `docker compose up -d`
+
+### 3. Integração com Nginx Proxy Manager (NPM)
+
+Ao configurar o Proxy Host no NPM:
+
+- **Forward Hostname:** Usar o `container_name` definido no `docker-compose.yml`.
+- **Forward Port:** `3000`.
+
+> [!NOTE]
+> Caso identifique variações na versão do Node no `package.json`, ajuste a imagem base do Dockerfile para manter a compatibilidade.
 
 ---
 
