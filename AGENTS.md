@@ -1,8 +1,9 @@
 # Instruções para Agentes de Desenvolvimento (AGENTS.md)
 
 > [!NOTE]
+>
 > - **Autor:** [Cassiano Freitas](https://github.com/cassianofreitas)
-> - **Versão:** 1.0.1
+> - **Versão:** 1.0.2
 > - **Idioma de trabalho:** Português do Brasil (pt-BR).
 > - **Escopo:** Este documento define as diretrizes, padrões e expectativas para todos os agentes de IA que interagem com este repositório. O objetivo é garantir consistência, acessibilidade e qualidade técnica seguindo as melhores práticas modernas.
 
@@ -16,8 +17,9 @@
 ## 2. Inicialização e Fluxo de Trabalho (Get Shit Done)
 
 - **Get Shit Done (GSD):** Este projeto utiliza a metodologia e ferramenta [Get Shit Done](https://github.com/gsd-build/get-shit-done).
-- **Ação de Início:** Ao iniciar uma nova sessão ou tarefa, o agente deve sempre acionar o `gsd`.
-- **Verificação de Instalação:** Caso o comando `gsd` não esteja disponível no ambiente, o agente deve sinalizar o usuário imediatamente, fornecendo o link do repositório e instruções para instalação.
+- **Início de Sessão:** Ao iniciar uma nova sessão, o agente deve sempre acionar o `gsd-progress --next`.
+- **Tarefa Rápida:** Ao iniciar uma nova tarefa, o agente deve sempre acionar o `gsd-quick`.
+- **Verificação de Instalação:** Caso o comando `gsd-progress` não esteja disponível no ambiente, o agente deve sinalizar o usuário imediatamente, fornecendo o link do repositório e instruções para instalação.
 
 ## 3. Controle de Versão e Histórico
 
@@ -43,7 +45,8 @@
 ## 5. Documentação e Estética
 
 - **README:** O arquivo principal de documentação deve seguir a estrutura proposta pelo [Make a README](https://www.makeareadme.com/).
-- **Ícones:** Para representações visuais e badges, utilize exclusivamente ícones do [Simple Icons](https://simpleicons.org/).
+- **Pacote de Ícones**: Utilize o [Lucide](https://lucide.dev/) como pacote padrão de ícones.
+- **Ícones de Marca:** Para ícones de marcas, utilize o [Simple Icons](https://simpleicons.org/).
 - **Documentação de Código:** Comentários JSDoc em português para funções complexas e tipagem rigorosa com TypeScript.
 
 > [!WARNING]
